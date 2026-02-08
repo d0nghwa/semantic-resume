@@ -1,0 +1,6 @@
+resume.*
+# compiled using tinytex, which isn't packaged with certain packages listed here
+packages.txt
+
+# exclusions
+!resume.tex
