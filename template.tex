@@ -1,0 +1,211 @@
+% See the documentation for usage:
+% https://github.com/d0nghwa/semantic-resume
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{amsmath}
+\usepackage[english]{babel}
+\usepackage{enumitem}
+\usepackage[empty]{fullpage}
+\usepackage[hidelinks]{hyperref}
+\usepackage{latexsym}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{verbatim}
+\usepackage{xcolor}
+\input{glyphtounicode}
+
+\usepackage{CormorantGaramond}
+
+% adjust margins
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.5in}
+\addtolength{\textheight}{1.0in}
+
+\urlstyle{same}
+
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% format sections
+\titleformat{\section}{
+  \scshape
+  \raggedright
+  \large
+}{}{0em}{}[
+  \color{gray}
+  \titlerule
+  \vspace{-5pt}
+]
+
+% ensure that generate pdf is machine readable/ATS parsable
+\input glyphtounicode
+\pdfgentounicode=1
+
+% regular text lighter to highlight position/company text
+\newcommand{\primaryColour}[1]{\textcolor{darkgray}{#1}}
+
+% changes list markers to bullet points
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% width of contents smaller than section headers
+\newcommand{\contentWidth}{0.985\textwidth}
+
+\newenvironment{resumeExperience}{
+  \begin{center}
+    \begin{minipage}{\contentWidth}
+      \begin{itemize}[leftmargin=0.0in, label={}, nosep]
+}{
+      \vspace{-12pt}
+      \end{itemize}
+    \end{minipage}
+  \end{center}
+}
+
+\newcommand{\experienceOrganisationLocation}[2]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{@{\extracolsep{\fill}} lr}
+    \textbf{#1} & \small{#2}
+  \end{tabular*}
+}
+
+\newcommand{\experiencePositionDate}[2]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{@{\extracolsep{\fill}} lr}
+    \textit{#1} & \small{\textit{\primaryColour{#2}}}
+  \end{tabular*}
+}
+
+\newcommand{\experienceProjectDate}[2]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{@{\extracolsep{\fill}} lr}
+    \textbf{#1} & \small{\textit{\primaryColour{#2}}}
+  \end{tabular*}
+}
+
+\newenvironment{experienceAchievementList}{
+  \item
+  \vspace{1pt}
+  \begin{itemize}[left=2pt, noitemsep]
+}{
+  \end{itemize}
+  \vspace{2pt}
+}
+
+\newcommand{\achievement}[1]{
+  \item
+  \small{
+    \primaryColour{#1}
+  }
+}
+
+\newcommand{\categoryList}[2]{
+  \item
+  \begin{tabular*}{\textwidth}[t]{@{\extracolsep{\fill}} lr}
+    \textbf{#1} & \small\primaryColour{#2}
+  \end{tabular*}
+  \par
+}
+
+% document
+\begin{document}
+
+\begin{center}
+  \textbf{\Huge \scshape First Last}
+
+  \vspace{0.03125in}
+  user@email.com
+  $|$ \href
+    {https://www.linkedin.com/in/username}
+    {\underline{linkedin.com/in/username}}
+  $|$ \href
+    {https://www.github.com/username}
+    {\underline{github.com/username}}
+\end{center}
+
+\vspace{-0.3125in}
+
+\section{\textbf{Education}}
+\begin{resumeExperience}
+  \experienceOrganisationLocation
+    {University Name}
+    {City, State/Province}
+  \experiencePositionDate
+    {Degree Name, Minor (if any), GPA X.X/4.0 (if impressive)}
+    {Month Year}
+  \categoryList
+    {Awards:}
+    {Award 1, Award 2, ...}
+
+\end{resumeExperience}
+
+\section{\textbf{Skills}}
+\begin{resumeExperience}
+  \categoryList
+    {Languages:}
+    {Language 1, Language 2, Language 3}
+  \categoryList
+    {Tools:}
+    {Tool 1, Tool 2, Tool 3}
+\end{resumeExperience}
+
+\section{\textbf{Experience}}
+\begin{resumeExperience}
+  \experienceOrganisationLocation
+    {Company Name}
+    {City, State/Province}
+  \experiencePositionDate
+    {Job Title (Promotion/Career Change)}
+    {Month Year -- Month Year}
+  \begin{experienceAchievementList}
+    \achievement{
+      Produced result or action using action verbs to highlight career projectory, achieving \textbf{Quantifiable Metrics}.
+    }
+  \end{experienceAchievementList}
+  \experiencePositionDate
+    {Job Title}
+    {Month Year -- Month Year}
+  \begin{experienceAchievementList}
+    \achievement{
+      Accomplished a task or feature using action verbs and specific technologies to improve \textbf{Quantifiable Metrics}.
+    }
+    \achievement{
+      Developed a project using action verbs and specific technologies that is capable of \textbf{Quantifiable Metrics}.
+    }
+  \end{experienceAchievementList}
+  
+  \experienceOrganisationLocation
+    {Company Name}
+    {City, State/Province}
+  \experiencePositionDate
+    {Job Title}
+    {Month Year -- Month Year}
+  \begin{experienceAchievementList}
+    \achievement{
+      Description of the task, action, and result using \textbf{Action Verbs} and \textbf{Quantifiable Metrics}.
+    }
+    \achievement{
+      Another achievement that demonstrates impact.
+    }
+  \end{experienceAchievementList}
+
+\end{resumeExperience}
+
+\section{\textbf{Projects}}
+\begin{resumeExperience}
+  \experienceProjectDate
+    {Project Name}
+    {Month Year}
+  \begin{experienceAchievementList}
+    \achievement{
+      Description of the project and your contributions.
+    }
+    \achievement{
+      Key technologies used and the outcome.
+    }
+  \end{experienceAchievementList}
+\end{resumeExperience}
+
+\end{document}
