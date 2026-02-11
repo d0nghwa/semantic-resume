@@ -1,7 +1,8 @@
 # Semantic Resume
 
 This is a LaTeX template for a resume that with custom environments/commands to
-make modifications easier.
+make modifications easier. This template can also be viewed online:
+### [Overleaf](https://www.overleaf.com/read/bhzhcshypjjj#028456)
 
 While resume templates are widely available, this template is designed to be
 easily parseable and modifiable for the user _writing_ the resume, in addition
