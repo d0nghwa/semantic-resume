@@ -11,75 +11,66 @@ own aesthetic preferences.
 Based on [Jake's Resume](https://github.com/jakegut/resume) template for the
 baseline layout.
 
-## How to compile
+## Usage
 
-The template can be compiled using `pdflatex`, or any other LaTeX compiler.
+This template uses semantic commands and environments to make the source code readable and extensible.
 
-```bash
-pdflatex resume.tex
-```
+### Environments & commands
 
-## What features does this have?
+The template is built around the `resumeExperience` environment. Everything inside this environment is a list element (`\item`), which ensures consistent vertical spacing and alignment across different sections.
 
-This template uses semantic commands to make the source code readable and
-extensible.
+#### Structuring sections
 
-### Experiences & positions
-The `resumeExperience` environment is used for any section involving
-organizations, roles, and dates (Experience, Extracurriculars, Projects, etc.).
+The `resumeExperience` is main wrapper environment for all content sections (Education, Skills, Experience, Projects). It initializes the main list structure. Every section should have its own `resumeExperience` environment for structuring its contents.
 
-#### Custom commands
-- `\experienceOrganisationLocation{Name}{Location}`: Defines the top-level
-entity (company, school, club, etc.), with the name bolded. The name and
-location will be left-aligned and right-aligned respectively.
-- `\experiencePositionDate{Title}{Date}`: Defines the specific role and
-timeline, with the date and title italicised. The title and date will be
-left-aligned and right-aligned respectively.
-- `\achievement{Description}`: Defines a bullet point. The text will be slightly
-lighter than the default text colour.
+The sections themselves can be created using the standard `\section` command.
 
-#### Modularity
-Experiences can be modular. You can list multiple positions under a single
-organization by simply adding more `\experiencePositionDate` blocks under the
-same `\experienceOrganisationLocation`.
+#### Content blocks
+Since they operate within `resumeExperience`, the following commands act as formatted list items:
 
-*Example:*
+- `\experienceOrganisationLocation{Name}{Location}`: Bolded name (left) and location (right).
+- `\experiencePositionDate{Title}{Date}`: Italicised title (left) and date (right).
+- `\experienceProjectDate{Project name}{Date}`: Bolded project (left) and date (right).
+- `\categoryList{Category}{Content}`: Two-column row for skills, awards, or any other in-lined list. Labels are bolded.
+- `experienceAchievementList`: A nested environment used to list tailored achievements/bullet points. It creates a sub-list (which is itself an item) under the current experience environment.
+  - `\achievement{Description}`: Individual bullet points within the achievement list.
+
+### Examples
+
+#### Experience / projects
+Experiences are modular. You can list multiple positions under a single organization or mix and match blocks.
+
 ```latex
 \begin{resumeExperience}
   \experienceOrganisationLocation
     {Company Name}
     {Location}
 
-    % Second position at the company (promotion?)
-    \experiencePositionDate
-      {Role Title 2}
-      {Jan 2021 -- Present}
-    \begin{experienceAchievementList}
-      \achievement{Did even cooler stuff.}
-    \end{experienceAchievementList}
+  % Second position at the company (promotion?)
+  \experiencePositionDate
+    {Role Title 2}
+    {Jan 2021 -- Present}
+  \begin{experienceAchievementList}
+    \achievement{Did even cooler stuff.}
+  \end{experienceAchievementList}
 
-    \vspace{-3pt} % suggested for vertical spacing between positions
-  
-    % First position at the company
-    \experiencePositionDate
-      {Role Title 1}
-      {Jan 2020 -- Dec 2020}
-    \begin{experienceAchievementList}
-      \achievement{Did cool stuff.}
-    \end{experienceAchievementList}
+  % First position at the company
+  \experiencePositionDate
+    {Role Title 1}
+    {Jan 2020 -- Dec 2020}
+  \begin{experienceAchievementList}
+    \achievement{Did cool stuff.}
+  \end{experienceAchievementList}
 
 \end{resumeExperience}
 ```
 
-### Skills & Lists
-The `categoryList` environment is used for simple two-column formatting, perfect
-for listing awards or skills. The first argument is the category name, and the
-second is the list of items, which will be right-aligned.
+#### In-lined lists
+The `\categoryList` command creates a clean tabular look for skills, but it must be used inside `resumeExperience`.
 
-*Example:*
 ```latex
-\begin{categoryList}
-  \categoryItem{Languages:}{Python, Java, C++}
-  \categoryItem{Tools:}{Docker, AWS, Git}
-\end{categoryList}
+\begin{resumeExperience}
+  \categoryList{Languages:}{Python, Java, C++}
+  \categoryList{Tools:}{Docker, AWS, Git}
+\end{resumeExperience}
 ```
